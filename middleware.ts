@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-export function middleware(request) {
+export function middleware(request: any) {
   const origin = request.headers.get("origin");
   console.log(origin);
 
@@ -26,3 +26,5 @@ export function middleware(request) {
 export const config = {
   matcher: "/api/:path*",
 };
+
+export { default } from "next-auth/middleware";

@@ -1,10 +1,8 @@
 import styles from "./page.module.css";
-import Login from "./components/Login";
+import { options } from "./api/auth/[...nextauth]/options";
+import { getServerSession } from "next-auth/next";
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <Login />
-    </main>
-  );
+export default async function Home() {
+  const session = await getServerSession(options);
+  return <main className={styles.main}>Hello World</main>;
 }
