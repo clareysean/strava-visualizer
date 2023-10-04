@@ -16,10 +16,9 @@ export const options: NextAuthOptions = {
         token.id = account.athlete.id;
         token.refreshToken = account.refresh_token;
       } else if (token.accessToken && token.refreshToken) {
-        // Check if the access token has expired
         if (Date.now() >= token.expiresAt) {
           try {
-            // Use the Strava API to refresh the access token
+            // Call Strava API to refresh the access token
             const response = await fetch(
               "https://www.strava.com/api/v3/oauth/token",
               {
@@ -57,7 +56,7 @@ export const options: NextAuthOptions = {
     async session({ session, token }: { session: any; token: any }) {
       // Add the user id to the session
       session.user.id = token.id;
-      session.user.accessToken = token.accessToken;
+      session.accessToken = token.accessToken;
       return session;
     },
   },

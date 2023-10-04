@@ -1,11 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import { getServerSession } from "next-auth";
-import { options } from "@/app/api/auth/[...nextauth]/options";
+import { Session } from "next-auth";
 
-export default async function Index({}) {
-  const session = await getServerSession(options);
-  // console.log(session);
+export default async function Index({ session }: { session: Session | null }) {
   return (
     <div>
       <nav>
