@@ -1,17 +1,11 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
+import { options } from "@/app/api/auth/[...nextauth]/options";
 
-export default function Index({}) {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/api/auth/signin");
-    },
-  });
+export default async function Index({}) {
+  const session = await getServerSession(options);
+  // console.log(session);
   return (
     <div>
       <nav>
