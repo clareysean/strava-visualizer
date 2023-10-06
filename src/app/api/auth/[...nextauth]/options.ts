@@ -12,7 +12,7 @@ export const options: NextAuthOptions = {
     async jwt({ token, account }: { token: any; account: any }) {
       // Persist the OAuth access_token and user id to the token right after signin
       if (account) {
-        token.accessToken = account.access_token;
+        token.accessToken = account.access_token; // account is the Strava user object
         token.id = account.athlete.id;
         token.refreshToken = account.refresh_token;
       } else if (token.accessToken && token.refreshToken) {
@@ -59,5 +59,12 @@ export const options: NextAuthOptions = {
       session.accessToken = token.accessToken;
       return session;
     },
+    // async redirect({ url, baseUrl }) {
+    //   // Allows relative callback URLs
+    //   if (url.startsWith("/")) return `${baseUrl}${url}`;
+    //   // Allows callback URLs on the same origin
+    //   else if (new URL(url).origin === baseUrl) return url;
+    //   return baseUrl;
+    // },
   },
 };

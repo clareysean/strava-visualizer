@@ -1,15 +1,18 @@
-import React from "react";
-import Link from "next/link";
-import { Session } from "next-auth";
+"use client";
 
-export default async function Index({ session }: { session: Session | null }) {
+import React from "react";
+import { signIn, signOut, useSession } from "next-auth/react";
+
+export default function Index() {
+  const { data: session, status } = useSession();
+  console.log(session);
   return (
     <div>
       <nav>
         {session ? (
-          <Link href="/api/auth/signout">SIGN OUT</Link>
+          <a onClick={() => signIn("strava", { callBackUrl: "/" })}>SIGN IN</a>
         ) : (
-          <Link href="/api/auth/signin">SIGN IN</Link>
+          <a onClick={() => signOut()}>SIGN OUT</a>
         )}
       </nav>
     </div>

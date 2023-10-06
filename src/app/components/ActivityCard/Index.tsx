@@ -1,5 +1,4 @@
 import React from "react";
-import { Session } from "next-auth";
-export default function Index({ session }: { session: Session | null }) {
+export default function Index() {
   return <div>Index</div>;
 }
