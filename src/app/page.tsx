@@ -1,15 +1,15 @@
 import Header from "./components/Header";
 import ActivityList from "./components/ActivityList";
-import { SessionWithToken } from "./types/SessionWithToken";
-import CurrentSessionProvider from "./contexts/CurrentSessionProvider";
+import { getServerSession } from "next-auth";
+import { options } from "./api/auth/[...nextauth]/options";
 
 export default async function Home({}) {
+  const session = await getServerSession(options);
+  console.log(session);
   return (
     <main>
-      <CurrentSessionProvider>
-        <Header />
-        <ActivityList />
-      </CurrentSessionProvider>
+      <Header session={session} />
+      <ActivityList />
     </main>
   );
 }
