@@ -10,7 +10,7 @@ export default function Index() {
     <div>
       <nav>
         {session ? (
-          <a onClick={() => signIn("strava", { callBackUrl: "/" })}>SIGN IN</a>
+          <a onClick={() => signIn()}>SIGN IN</a>
         ) : (
           <a onClick={() => signOut()}>SIGN OUT</a>
         )}

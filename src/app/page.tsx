@@ -3,14 +3,10 @@ import ActivityList from "./components/ActivityList";
 import { SessionWithToken } from "./types/SessionWithToken";
 import CurrentSessionProvider from "./contexts/CurrentSessionProvider";
 
-export default async function Home({
-  session,
-}: {
-  session: SessionWithToken | null;
-}) {
+export default async function Home({}) {
   return (
     <main>
-      <CurrentSessionProvider session={session}>
+      <CurrentSessionProvider>
         <Header />
         <ActivityList />
       </CurrentSessionProvider>
