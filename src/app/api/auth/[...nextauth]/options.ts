@@ -1,17 +1,19 @@
 import type { NextAuthOptions } from "next-auth";
-import StravaProvider from "next-auth/providers/strava";
+import CustomStravaProvider from "@/app/utils/customProvider";
+import { CustomStravaProviderOptions } from "@/app/types/StravaProviderTypes";
+
+const customProviderOptions: CustomStravaProviderOptions = {
+  clientId: process.env.STRAVA_CLIENT_ID as string,
+  clientSecret: process.env.STRAVA_SECRET as string,
+};
 
 export const options: NextAuthOptions = {
-  providers: [
-    StravaProvider({
-      clientId: process.env.STRAVA_CLIENT_ID as string,
-      clientSecret: process.env.STRAVA_SECRET as string,
-    }),
-  ],
+  providers: [CustomStravaProvider(customProviderOptions)],
   callbacks: {
     async jwt({ token, account }: { token: any; account: any }) {
       // Persist the OAuth access_token and user id to the token right after signin
       if (account) {
+        console.log("account", account);
         token.accessToken = account.access_token; // account is the Strava user object
         token.id = account.athlete.id;
         token.refreshToken = account.refresh_token;
