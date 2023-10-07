@@ -1,4 +1,3 @@
-// Define an interface for the provider options
 interface StravaProviderOptions {
   clientId: string;
   clientSecret: string;
