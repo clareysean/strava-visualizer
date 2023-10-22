@@ -3,7 +3,6 @@ interface StravaProviderOptions {
   clientSecret: string;
 }
 
-// Define an interface for the profile object
 interface StravaProfile {
   id: number;
   firstname: string;
@@ -11,7 +10,6 @@ interface StravaProfile {
   profile: string;
 }
 
-// Define your custom provider function
 export default function CustomStravaProvider(options: StravaProviderOptions) {
   return {
     id: "customStrava",

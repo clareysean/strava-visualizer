@@ -37,7 +37,7 @@ export default async function Home({}) {
   return (
     <main>
       <Header session={session} />
-      <ActivityList />
+      <ActivityList stats={stats} activities={activities} />
     </main>
   );
 }
