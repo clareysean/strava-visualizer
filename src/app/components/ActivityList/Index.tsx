@@ -1,8 +1,8 @@
 import ActivityCard from "../ActivityCard";
 
 interface Props {
-  stats: Object; // replace 'any' with the actual type of stats
-  activities: Object; // replace 'any' with the actual type of activities
+  stats: any[];
+  activities: any[];
 }
 
 export default function Index({ stats, activities }: Props) {
@@ -11,8 +11,9 @@ export default function Index({ stats, activities }: Props) {
     <div className="card">
       {error && <div>{error}</div>}
       Index
-      {/* map over activities and generate some cards here */}
-      <ActivityCard />
+      {activities.map((activity) => {
+        return <ActivityCard key={activity.id} activity={activity} />;
+      })}
     </div>
   );
 }
