@@ -1,17 +1,30 @@
-import { getServerSession } from "next-auth";
-import { options } from "../../auth/[...nextauth]/options";
-import { SessionWithToken } from "@/app/types/SessionWithToken";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: Request): Promise<NextResponse> {
-  const session: SessionWithToken | null = await getServerSession(options);
-  console.log("session", session);
+export async function GET(request: NextRequest): Promise<NextResponse> {
+  const searchParams = request.nextUrl.searchParams;
+  const query = searchParams.get("token");
+
+  if (!query) {
+    return NextResponse.json(
+      { error: "Missing 'query' parameter" },
+      { status: 400 }
+    );
+  }
+
   const res = await fetch("https://www.strava.com/api/v3/activities", {
     headers: {
-      Authorization: `Bearer ${session?.accessToken}`,
+      Authorization: `Bearer ${query}`,
       Accept: "*/*",
     },
   });
+
+  if (!res.ok) {
+    return NextResponse.json(
+      { error: "Failed to fetch data from Strava API" },
+      { status: res.status }
+    );
+  }
+
   const data = await res.json();
   console.log(data);
   return NextResponse.json({ data });
