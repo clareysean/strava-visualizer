@@ -23,8 +23,9 @@ export default async function Home({}) {
   );
 
   const stats = await fetch(
-    `${process.env.DEV_URL}/api/strava/stats?token=${session?.accessToken}&id=${session?.user?.id}`,
+    `${process.env.DEV_URL}/api/strava/stats?id=${session?.user?.id}`,
     {
+      headers: { Authorization: `Bearer ${session?.accessToken}` },
       method: "GET",
     }
   );

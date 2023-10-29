@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
-  console.log(request.headers.get("Authorization"));
-  console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
   try {
     const res = await fetch("https://www.strava.com/api/v3/activities", {
       headers: {
