@@ -1,19 +1,19 @@
-// import ActivityCard from "../ActivityCard";
+import ActivityCard from "../ActivityCard";
 
 interface Props {
   stats: any[];
-  activities: any[];
 }
 
-export default function Index({ stats, activities }: Props) {
+export default function Index({ stats }: Props) {
   let error: string | null = null;
+  console.log(stats);
   return (
     <div className="card">
       {error && <div>{error}</div>}
       Index
-      {/* {activities.map((activity) => {
-        return <ActivityCard key={activity.id} activity={activity} />;
-      })} */}
+      {stats.map((stat, index) => {
+        return <ActivityCard key={index} stat={stat} />;
+      })}
     </div>
   );
 }

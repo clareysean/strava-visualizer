@@ -9,7 +9,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       },
     });
     const data = await res.json();
-    console.log(data);
     return NextResponse.json({ data });
   } catch (error) {
     console.log(error);

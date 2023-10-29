@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function Index({ activity }: { activity: any }) {
+export default function Index({ stat }: { stat: any }) {
   return (
     <div className="card">
-      {Object.entries(activity).map(([key, value]) => (
+      {Object.entries(stat).map(([key, value]) => (
         <span key={key}>
           {key.toString()}: {value?.toString() as string} <br />
         </span>

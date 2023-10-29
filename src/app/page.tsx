@@ -22,13 +22,16 @@ export default async function Home({}) {
     }
   );
 
-  const stats = await fetch(
-    `${process.env.DEV_URL}/api/strava/stats?id=${session?.user?.id}`,
+  const statsResponse = await fetch(
+    `${process.env.DEV_URL}/api/strava/stats?id=${session?.user.id}`,
     {
       headers: { Authorization: `Bearer ${session?.accessToken}` },
       method: "GET",
     }
   );
+
+  const stats = await statsResponse.json();
+  console.log("statsData", stats);
 
   if (session?.accessToken == null) {
     return (
@@ -42,7 +45,7 @@ export default async function Home({}) {
   return (
     <main>
       <Header session={session} />
-      <ActivityList stats={stats as any} activities={activities as any} />
+      <ActivityList stats={stats as any} />
     </main>
   );
 }
