@@ -6,8 +6,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   const query = searchParams.get("token");
   const id = searchParams.get("id");
 
-  console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~params", query, id);
-
   if (!query) {
     return NextResponse.json(
       { error: "Missing 'query' parameter" },
@@ -33,6 +31,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   }
 
   const data = await res.json();
-  console.log(data);
+  // console.log(data);
   return NextResponse.json({ data });
 }

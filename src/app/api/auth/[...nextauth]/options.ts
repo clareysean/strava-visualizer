@@ -17,8 +17,10 @@ export const options: NextAuthOptions = {
         token.accessToken = account.access_token; // account is the Strava user object
         token.id = account.athlete.id;
         token.refreshToken = account.refresh_token;
+        token.expiresAt = account.expires_at;
       } else if (token.accessToken && token.refreshToken) {
         if (Date.now() >= token.expiresAt) {
+          console.log("~~~~~~~~~~~~refreshing token~~~~~~~~~~~");
           try {
             // Call Strava API to refresh the access token
             const response = await fetch(
@@ -39,6 +41,7 @@ export const options: NextAuthOptions = {
 
             if (response.ok) {
               const data = await response.json();
+              console.log("~~~~~~~~DATA~~~~~~~~~", data);
               token.accessToken = data.access_token;
               token.expiresAt = Date.now() + data.expires_in * 1000;
             } else {
@@ -59,6 +62,7 @@ export const options: NextAuthOptions = {
       // Add the user id to the session
       session.user.id = token.id;
       session.accessToken = token.accessToken;
+      // console.log("session", session);
       return session;
     },
     async redirect({ url, baseUrl }) {
